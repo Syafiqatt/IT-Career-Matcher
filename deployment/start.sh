@@ -1,11 +1,12 @@
 #!/bin/bash
+set -e
 
-echo "Menjalankan ML Service..."
+echo "Starting ML Service..."
 
-cd /app/deployment/ml-service
-uvicorn app:app --host 0.0.0.0 --port 8000 &
+cd /app/ml-service
+python3 -m uvicorn app:app --host 0.0.0.0 --port 8000 &
 
-echo "Menjalankan Backend..."
+echo "Starting Backend..."
 
-cd /app/deployment/backend
+cd /app/backend
 npm start

@@ -4,6 +4,8 @@
   "private": true,
   "description": "Menjalankan ML service (FastAPI), backend (Express), dan frontend (React) sekaligus",
   "scripts": {
+    "start": "bash start.sh",
+
     "dev": "concurrently -k -n ml,api,web -c magenta,green,cyan \"npm:dev:ml\" \"npm:dev:api\" \"npm:dev:web\"",
     "dev:ml": "cd ml-service && python -m uvicorn app:app --host 127.0.0.1 --port 8000",
     "dev:api": "cd backend && npm run dev",
