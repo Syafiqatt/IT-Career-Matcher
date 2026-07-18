@@ -1,4 +1,4 @@
-# 🎯 Sistem Rekomendasi Karir IT
+# Sistem Rekomendasi Karir IT
 
 Proyek **end-to-end machine learning + web** yang merekomendasikan jalur karir IT yang
 paling cocok bagi seseorang berdasarkan **skill, tools, database, lama pengalaman koding,
