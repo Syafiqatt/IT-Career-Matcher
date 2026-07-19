@@ -39,9 +39,16 @@ class PredictResponse(BaseModel):
 
 @app.on_event("startup")
 def _warmup():
-    # Muat artefak saat start agar request pertama tidak lambat.
-    load_artifact()
-
+    try:
+        print("=== Loading model ===")
+        art = load_artifact()
+        print("=== SUCCESS ===")
+        print(art.keys())
+    except Exception as e:
+        import traceback
+        print("=== MODEL ERROR ===")
+        traceback.print_exc()
+        raise e
 
 @app.get("/health")
 def health():
