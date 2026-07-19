@@ -11,7 +11,7 @@ if [ ! -f "career_recommender_model.joblib" ]; then
 fi
 
 echo "Menjalankan ML Service..."
-python3 -m uvicorn app:app --host 0.0.0.0 --port 8000 
+python3 -m uvicorn app:app --host 0.0.0.0 --port 8000 &
 
 echo "Isi folder ml-service:"
 ls -lh
