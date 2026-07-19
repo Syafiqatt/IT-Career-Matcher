@@ -18,15 +18,22 @@ _ARTIFACT_PATH = os.path.join(os.path.dirname(__file__), "career_recommender_mod
 _art = None
 
 
-def load_artifact(path: str = _ARTIFACT_PATH):
-    """Muat artefak model sekali (lazy / cached)."""
-    global _art
-    if _art is None:
-        _art = joblib.load(path)
-    return _art
-    print("Loading joblib file...", flush=True)
-    artifact = joblib.load(MODEL_PATH)
-    print("Joblib file loaded.", flush=True)
+def load_artifact():
+    global _artifact
+    if _artifact is None:
+        print("=== load_artifact: start ===", flush=True)
+        print(f"=== model path: {MODEL_PATH} ===", flush=True)
+        print(f"=== file exists: {os.path.exists(MODEL_PATH)} ===", flush=True)
+        print(f"=== file size: {os.path.getsize(MODEL_PATH)} bytes ===", flush=True)
+        print("=== before joblib.load ===", flush=True)
+
+        _artifact = joblib.load(MODEL_PATH)
+
+        print("=== after joblib.load ===", flush=True)
+        print(f"=== artifact type: {type(_artifact)} ===", flush=True)
+        print(f"=== artifact keys: {list(_artifact.keys())} ===", flush=True)
+
+    return _artifact
 
 def get_vocab():
     """Kembalikan daftar opsi valid untuk UI (skills, tools, databases, kelas karir).
