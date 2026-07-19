@@ -7,7 +7,7 @@ Hanya dipanggil oleh backend Express (bukan langsung oleh frontend).
 Jalankan:
     uvicorn app:app --host 127.0.0.1 --port 8000
 """
-from typing import List, Optional
+from typing import List
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -37,25 +37,26 @@ class PredictResponse(BaseModel):
     recommendations: List[Recommendation]
 
 
-@app.on_event("startup")
-def _warmup():
-    try:
-        print("=== Startup begin ===", flush=True)
-        print("=== About to load artifact ===", flush=True)
-        art = load_artifact()
-        print("=== Artifact loaded successfully ===", flush=True)
-        print(f"=== Model name: {art.get('model_name')} ===", flush=True)
-        print(f"=== Artifact keys: {list(art.keys())} ===", flush=True)
-    except Exception as e:
-        import traceback
-        print("=== MODEL ERROR ===", flush=True)
-        traceback.print_exc()
-        raise e
+# MATIKAN DULU startup warmup ini
+# @app.on_event("startup")
+# def _warmup():
+#     try:
+#         print("=== Startup begin ===", flush=True)
+#         print("=== About to load artifact ===", flush=True)
+#         art = load_artifact()
+#         print("=== Artifact loaded successfully ===", flush=True)
+#         print(f"=== Model name: {art.get('model_name')} ===", flush=True)
+#         print(f"=== Artifact keys: {list(art.keys())} ===", flush=True)
+#     except Exception as e:
+#         import traceback
+#         print("=== MODEL ERROR ===", flush=True)
+#         traceback.print_exc()
+#         raise e
+
 
 @app.get("/health")
 def health():
-    art = load_artifact()
-    return {"status": "ok", "model": art["model_name"]}
+    return {"status": "ok", "message": "ml service running"}
 
 
 @app.get("/vocab")
