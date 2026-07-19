@@ -1,8 +1,8 @@
 import app from "./app.js";
 import { config } from "./config/index.js";
 
-const server = app.listen(config.port, () => {
-  console.log(`🚀 API berjalan di http://localhost:${config.port}`);
+const server = app.listen(config.port, "0.0.0.0", () => {
+  console.log(`🚀 API berjalan di http://0.0.0.0:${config.port}`);
   console.log(`   ML service: ${config.mlServiceUrl}`);
 });
 
