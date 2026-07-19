@@ -40,13 +40,15 @@ class PredictResponse(BaseModel):
 @app.on_event("startup")
 def _warmup():
     try:
-        print("=== Loading model ===")
+        print("=== Startup begin ===", flush=True)
+        print("=== About to load artifact ===", flush=True)
         art = load_artifact()
-        print("=== SUCCESS ===")
-        print(art.keys())
+        print("=== Artifact loaded successfully ===", flush=True)
+        print(f"=== Model name: {art.get('model_name')} ===", flush=True)
+        print(f"=== Artifact keys: {list(art.keys())} ===", flush=True)
     except Exception as e:
         import traceback
-        print("=== MODEL ERROR ===")
+        print("=== MODEL ERROR ===", flush=True)
         traceback.print_exc()
         raise e
 
