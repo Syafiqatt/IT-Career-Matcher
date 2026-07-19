@@ -4,10 +4,10 @@ set -e
 echo "Masuk ke ML Service..."
 cd /app/ml-service
 
-# Download model jika belum ada
-if [ ! -f "career_recommender_model.pkl" ]; then
+if [ ! -f "career_recommender_model.joblib" ]; then
     echo "Downloading ML model..."
-    python3 -m gdown --id 1oxJa6tXs8rjAAOy-fzyS4cyNKchggvwl -O career_recommender_model.pkl
+    python3 -m gdown "https://drive.google.com/uc?id=1oxJa6tXs8rjAAOy-fzyS4cyNKchggvwl" \
+        -O career_recommender_model.joblib
 fi
 
 echo "Menjalankan ML Service..."
