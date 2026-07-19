@@ -24,7 +24,9 @@ def load_artifact(path: str = _ARTIFACT_PATH):
     if _art is None:
         _art = joblib.load(path)
     return _art
-
+    print("Loading joblib file...", flush=True)
+    artifact = joblib.load(MODEL_PATH)
+    print("Joblib file loaded.", flush=True)
 
 def get_vocab():
     """Kembalikan daftar opsi valid untuk UI (skills, tools, databases, kelas karir).
