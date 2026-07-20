@@ -8,10 +8,20 @@ import { query } from "../db/pool.js";
  * Bila pengguna login (req.user), riwayat ditautkan ke akunnya.
  */
 export const createRecommendation = asyncHandler(async (req, res) => {
+  console.log("=== POST /api/recommendations called ===");
+  console.log("req.body =", req.body);
+  console.log("req.validated =", req.validated);
+
   const profile = req.validated;
   const userId = req.user?.id ?? null;
 
+  console.log("=== about to call ML service ===");
+
   const ml = await predictCareer(profile);
+
+  console.log("=== ML service responded ===");
+  console.log("ml =", ml);
+
   const recs = ml.recommendations || [];
   const top = recs[0] || {};
 
