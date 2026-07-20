@@ -9,7 +9,7 @@ Jalankan:
 """
 from typing import List
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from recommender import recommend_career, get_vocab, load_artifact
@@ -66,12 +66,38 @@ def vocab():
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: ProfileRequest):
-    recs = recommend_career(
-        skills=req.skills,
-        tools=req.tools,
-        databases=req.databases,
-        years_code=req.years_code,
-        education_level=req.education_level,
-        top_n=req.top_n,
-    )
-    return {"model_name": load_artifact()["model_name"], "recommendations": recs}
+    try:
+        print("=== /predict called ===", flush=True)
+        print(f"skills={req.skills}", flush=True)
+        print(f"tools={req.tools}", flush=True)
+        print(f"databases={req.databases}", flush=True)
+        print(f"years_code={req.years_code}", flush=True)
+        print(f"education_level={req.education_level}", flush=True)
+        print(f"top_n={req.top_n}", flush=True)
+
+        print("=== before recommend_career ===", flush=True)
+
+        recs = recommend_career(
+            skills=req.skills,
+            tools=req.tools,
+            databases=req.databases,
+            years_code=req.years_code,
+            education_level=req.education_level,
+            top_n=req.top_n,
+        )
+
+        print("=== after recommend_career ===", flush=True)
+
+        art = load_artifact()
+        print("=== after load_artifact for model_name ===", flush=True)
+
+        return {
+            "model_name": art["model_name"],
+            "recommendations": recs
+        }
+
+    except Exception as e:
+        import traceback
+        print("=== /predict ERROR ===", flush=True)
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
