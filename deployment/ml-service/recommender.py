@@ -13,8 +13,7 @@ import os
 import numpy as np
 import joblib
 
-_ARTIFACT_PATH = os.path.join(os.path.dirname(__file__), "career_recommender_model.joblib")
-
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "career_recommender_model.joblib")
 _artifact = None
 
 
