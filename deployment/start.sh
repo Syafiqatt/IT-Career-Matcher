@@ -48,7 +48,16 @@ done
 
 echo "Menjalankan Backend..."
 cd /app/backend
-
 export ML_SERVICE_URL="http://127.0.0.1:8000"
 
-npm start
+npm start &
+BACKEND_PID=$!
+
+echo "ML PID: $ML_PID"
+echo "Backend PID: $BACKEND_PID"
+
+wait -n "$ML_PID" "$BACKEND_PID"
+EXIT_CODE=$?
+
+echo "Salah satu proses mati. Exit code: $EXIT_CODE"
+exit "$EXIT_CODE"
