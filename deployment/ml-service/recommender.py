@@ -22,15 +22,15 @@ def load_artifact():
 
     if _artifact is None:
         print("=== load_artifact: start ===", flush=True)
-        print(f"=== model path: {_ARTIFACT_PATH} ===", flush=True)
-        print(f"=== file exists: {os.path.exists(_ARTIFACT_PATH)} ===", flush=True)
+        print(f"=== model path: {MODEL_PATH} ===", flush=True)
+        print(f"=== file exists: {os.path.exists(MODEL_PATH)} ===", flush=True)
 
-        if os.path.exists(_ARTIFACT_PATH):
-            print(f"=== file size: {os.path.getsize(_ARTIFACT_PATH)} bytes ===", flush=True)
+        if os.path.exists(MODEL_PATH):
+            print(f"=== file size: {os.path.getsize(MODEL_PATH)} bytes ===", flush=True)
 
         print("=== before joblib.load ===", flush=True)
 
-        _artifact = joblib.load(_ARTIFACT_PATH)
+        _artifact = joblib.load(MODEL_PATH)
 
         print("=== after joblib.load ===", flush=True)
         print(f"=== artifact type: {type(_artifact)} ===", flush=True)
