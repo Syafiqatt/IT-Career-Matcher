@@ -15,7 +15,7 @@ import joblib
 
 _ARTIFACT_PATH = os.path.join(os.path.dirname(__file__), "career_recommender_model.joblib")
 
-_art = None
+_artifact = None
 
 
 def load_artifact():
